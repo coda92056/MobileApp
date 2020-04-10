@@ -6,6 +6,7 @@ libspecs/
 report.html
 log.html
 output.xml
+*.png
 
 
 
