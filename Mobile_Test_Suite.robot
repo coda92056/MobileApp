@@ -15,7 +15,14 @@ Redirect_to_links
     AppiumLibrary.Go Back
     Wait Until Page Contains     Fly with peace          
     Close All Applications
-Enter_credentials
+Redirect_to_webview
+    Open Application    http://localhost:4723/wd/hub    platformName=Android    platformVersion=8.1    deviceName=Pixel XL API 27    app=C:\\mobile_apk\\original.apk    appPackage=com.example.myapplication
+    Wait Until Page Contains     Fly with peace  
+    AppiumLibrary.Click Element    id=weblogin
+    Set Appium Timeout   10s  
+    Wait Until Page Contains    Login to Flight Application
+    
+Enter_Info
     Open Application    http://localhost:4723/wd/hub    platformName=Android    platformVersion=8.1    deviceName=Pixel XL API 27    app=C:\\mobile_apk\\original.apk    appPackage=com.example.myapplication
     Wait Until Page Contains    Fly with peace   
     AppiumLibrary.Click Element    id=practice
@@ -23,6 +30,9 @@ Enter_credentials
     AppiumLibrary.Clear Text    id=editText1  
     AppiumLibrary.Input Text    id=editText1  Koda
     AppiumLibrary.Input Password   id=editText2  password
-
+    AppiumLibrary.Click Element    id=radioButtonFlight
+    AppiumLibrary.Click Element    id=radioButtonFlightHotel
+    
+ 
    
 
