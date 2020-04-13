@@ -28,7 +28,7 @@ Redirect_to_webview
     Wait Until Page Contains    Login to Flight Application
     AppiumLibrary.Close Application
 Enter_Info
-    [tags]  full
+    [tags]  sanity
     Open Application    http://localhost:4723/wd/hub    platformName=Android    platformVersion=8.1    deviceName=Pixel XL API 27    app=C:\\mobile_apk\\original.apk    appPackage=com.example.myapplication
     Wait Until Page Contains    Fly with peace   
     AppiumLibrary.Click Element    id=practice
@@ -37,7 +37,7 @@ Enter_Info
     AppiumLibrary.Click Element    id=editText1 
     AppiumLibrary.Clear Text    id=editText1  
     AppiumLibrary.Input Text    id=editText1  Koda
-    AppiumLibrary.Hide Keyboard  
+    AppiumLibrary.Hide Keyboard
     AppiumLibrary.Click Element    id=editText2   
     AppiumLibrary.Input Password   id=editText2  password
     AppiumLibrary.Hide Keyboard
@@ -46,22 +46,22 @@ Enter_Info
     AppiumLibrary.Close Application
     
 Get_LastEntry_In_Table
-    [tags]  full
+    [tags]  sanity
     Open Application    http://localhost:4723/wd/hub    platformName=Android    platformVersion=8.1    deviceName=Pixel XL API 27    app=C:\\mobile_apk\\original.apk    appPackage=com.example.myapplication
     Wait Until Page Contains    Fly with peace   
     AppiumLibrary.Click Element    id=practice
     Sleep  5
     Wait Until Page Contains   SUBMIT   
     ${LastCountry}    AppiumLibrary.Get Text    //*[contains(@text,"Country")]/../../*[last()]/*[1]
-    #Log To Console    ${LastCountry}    
+    #Log To Console    ${LastCountry}
     Should contain   ${LastCountry}    Canada
     ${LastPM }    AppiumLibrary.Get Text    //*[contains(@text,"Country")]/../../*[last()]/*[2]
-    #Log To Console    ${LastCountry}    
+    #Log To Console    ${LastCountry}
     Should contain   ${LastPM}    Trudeau 
     AppiumLibrary.Close Application
     
 Select_options
-    [tags]  working
+    [tags]  sanit
     Open Application    http://localhost:4723/wd/hub    platformName=Android    platformVersion=8.1    deviceName=Pixel XL API 27    app=C:\\mobile_apk\\original.apk    appPackage=com.example.myapplication
     Wait Until Page Contains    Fly with peace   
     AppiumLibrary.Click Element    id=practice
@@ -75,3 +75,53 @@ Select_options
     AppiumLibrary.Click Element    id=checkBox
     AppiumLibrary.Close Application
     
+EndtoEnd
+    Login
+    Book
+    VerifyConfirmation
+
+*** Keywords ***
+Login
+    Open Application    http://localhost:4723/wd/hub    platformName=Android    platformVersion=8.1    deviceName=Pixel XL API 27    app=C:\\mobile_apk\\original.apk    appPackage=com.example.myapplication
+    Page Should Contain Text    Fly with peace
+    AppiumLibrary.Click Element    id=login
+    sleep  5
+    AppiumLibrary.Input Text       id=username  support@ngendigital.com
+    AppiumLibrary.Input Text       id=password  abc123   
+    AppiumLibrary.Hide Keyboard    
+    AppiumLibrary.Click Element    id=signIn
+    sleep  5
+    
+Book
+    AppiumLibrary.Click Element    id=book
+    sleep  5
+    AppiumLibrary.Click Element    id=spinnerFrom
+    sleep  5
+    AppiumLibrary.Click Element    xpath=//*[@text="Toronto"]
+    AppiumLibrary.Click Element    id=spinnerTo
+    sleep  5
+    AppiumLibrary.Click Element    xpath=//*[@text="Paris"]
+    AppiumLibrary.Click Element    id=spinnerClass
+    sleep  2
+    AppiumLibrary.Click Element    xpath=//*[@text="Economy"]
+    AppiumLibrary.Click Element    id=textStartDate
+    sleep  5
+    AppiumLibrary.Click Element    //android.view.View[@content-desc="11 December 2019"]
+    sleep  5
+    AppiumLibrary.Click Text    OK    
+    AppiumLibrary.Click Element    id=textEndDate
+    sleep  5
+    AppiumLibrary.Click Element    //android.view.View[@content-desc="20 December 2019"]
+    sleep  5
+    AppiumLibrary.Click Text    OK    
+    AppiumLibrary.Click Element    radioButtonFlight
+    sleep  5
+    AppiumLibrary.Click Element    book_flight
+    sleep  5
+    AppiumLibrary.Click Element    price5
+    sleep  5
+    AppiumLibrary.Click Element    confirm_order    
+
+VerifyConfirmation
+    Wait Until Page Contains    Your flight is booked.  
+    AppiumLibrary.Page Should Contain Text    Your flight is booked. Reservation number is CADX2214 
