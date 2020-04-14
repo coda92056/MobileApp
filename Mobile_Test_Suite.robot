@@ -61,7 +61,7 @@ Get_LastEntry_In_Table
     AppiumLibrary.Close Application
     
 Select_options
-    [tags]  sanit
+    [tags]  sanity
     Open Application    http://localhost:4723/wd/hub    platformName=Android    platformVersion=8.1    deviceName=Pixel XL API 27    app=C:\\mobile_apk\\original.apk    appPackage=com.example.myapplication
     Wait Until Page Contains    Fly with peace   
     AppiumLibrary.Click Element    id=practice
@@ -85,41 +85,41 @@ Login
     Open Application    http://localhost:4723/wd/hub    platformName=Android    platformVersion=8.1    deviceName=Pixel XL API 27    app=C:\\mobile_apk\\original.apk    appPackage=com.example.myapplication
     Page Should Contain Text    Fly with peace
     AppiumLibrary.Click Element    id=login
-    sleep  5
+    Wait Until Page Contains       Enter username
     AppiumLibrary.Input Text       id=username  support@ngendigital.com
     AppiumLibrary.Input Text       id=password  abc123   
     AppiumLibrary.Hide Keyboard    
     AppiumLibrary.Click Element    id=signIn
-    sleep  5
+    Wait Until Page Contains       Fly with peace
     
 Book
     AppiumLibrary.Click Element    id=book
     sleep  5
     AppiumLibrary.Click Element    id=spinnerFrom
-    sleep  5
+    Wait Until Page Contains       Toronto
     AppiumLibrary.Click Element    xpath=//*[@text="Toronto"]
     AppiumLibrary.Click Element    id=spinnerTo
-    sleep  5
+    Wait Until Page Contains       Ottawa
     AppiumLibrary.Click Element    xpath=//*[@text="Paris"]
     AppiumLibrary.Click Element    id=spinnerClass
-    sleep  2
+    Wait Until Page Contains       Business
     AppiumLibrary.Click Element    xpath=//*[@text="Economy"]
     AppiumLibrary.Click Element    id=textStartDate
-    sleep  5
+    Wait Until Page Contains       2019
     AppiumLibrary.Click Element    //android.view.View[@content-desc="11 December 2019"]
-    sleep  5
+    Sleep  5
     AppiumLibrary.Click Text    OK    
     AppiumLibrary.Click Element    id=textEndDate
-    sleep  5
+    Wait Until Page Contains       2019
     AppiumLibrary.Click Element    //android.view.View[@content-desc="20 December 2019"]
-    sleep  5
+    Sleep  5
     AppiumLibrary.Click Text    OK    
     AppiumLibrary.Click Element    radioButtonFlight
-    sleep  5
+    Wait Until Page Contains       Book
     AppiumLibrary.Click Element    book_flight
-    sleep  5
+    Wait Until Page Contains       Click on the price to confirm your booking
     AppiumLibrary.Click Element    price5
-    sleep  5
+    Wait Until Page Contains       Confirm
     AppiumLibrary.Click Element    confirm_order    
 
 VerifyConfirmation
