@@ -124,4 +124,12 @@ Book
 
 VerifyConfirmation
     Wait Until Page Contains    Your flight is booked.  
-    AppiumLibrary.Page Should Contain Text    Your flight is booked. Reservation number is CADX2214 
+    AppiumLibrary.Page Should Contain Text    Your flight is booked. Reservation number is CADX2214  
+    #fist 4 are characters and last 4 are digits
+    AppiumLibrary.Element Attribute Should Match    id=checkedTextView    text     Your flight is booked. Reservation number is \\w{4}\\d{4}  regexp=True
+    #8 totals characters
+    AppiumLibrary.Element Attribute Should Match    id=checkedTextView    text     Your flight is booked. Reservation number is \.{8}  regexp=True
+    #should not start with a digit
+    AppiumLibrary.Element Attribute Should Match    id=checkedTextView    text     Your flight is booked. Reservation number is [^\\d]\\w+  regexp=True
+     #should  end with digit
+    AppiumLibrary.Element Attribute Should Match    id=checkedTextView    text     Your flight is booked. Reservation number is \.*\\d$  regexp=True
