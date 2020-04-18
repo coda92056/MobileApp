@@ -6,7 +6,8 @@ Library    AppiumLibrary
 Launch_App
     [tags]  sanity
     Open Application    http://localhost:4723/wd/hub    platformName=Android    platformVersion=8.1    deviceName=Pixel XL API 27    app=C:\\mobile_apk\\original.apk    appPackage=com.example.myapplication
-    Page Should Contain Text    Fly with peace          
+    Page Should Contain Text    Fly with peace        
+    AppiumLibrary.Page Should Contain Element   imageView      
     AppiumLibrary.Close Application
 Redirect_to_links
     [tags]  smoke
@@ -75,13 +76,37 @@ Select_options
     AppiumLibrary.Click Element    id=checkBox
     AppiumLibrary.Close Application
     
+Signin_authenicated
+    [tags]  sanity
+    AuthenticatedUser
+    AppiumLibrary.Close Application
+    
+Signin_invaliduser
+    [tags]  sanity
+    BadUserName
+    AppiumLibrary.Close Application
+    
 EndtoEnd
-    Login
+    [tags]  full
+    AuthenticatedUser
     Book
     VerifyConfirmation
 
 *** Keywords ***
-Login
+
+BadUserName
+    Open Application    http://localhost:4723/wd/hub    platformName=Android    platformVersion=8.1    deviceName=Pixel XL API 27    app=C:\\mobile_apk\\original.apk    appPackage=com.example.myapplication
+    Page Should Contain Text    Fly with peace
+    AppiumLibrary.Click Element    id=login
+    Wait Until Page Contains       Enter username
+    AppiumLibrary.Input Text       id=username  baduser@ngendigital.com
+    AppiumLibrary.Input Text       id=password  abc123   
+    AppiumLibrary.Hide Keyboard    
+    AppiumLibrary.Click Element    id=signIn
+    Wait Until Page Contains       Invalid Username
+    
+
+AuthenticatedUser
     Open Application    http://localhost:4723/wd/hub    platformName=Android    platformVersion=8.1    deviceName=Pixel XL API 27    app=C:\\mobile_apk\\original.apk    appPackage=com.example.myapplication
     Page Should Contain Text    Fly with peace
     AppiumLibrary.Click Element    id=login
@@ -91,6 +116,7 @@ Login
     AppiumLibrary.Hide Keyboard    
     AppiumLibrary.Click Element    id=signIn
     Wait Until Page Contains       Fly with peace
+    Wait Until Page Contains       Sign Out
     
 Book
     AppiumLibrary.Click Element    id=book
